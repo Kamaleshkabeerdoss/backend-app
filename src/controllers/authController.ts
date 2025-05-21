@@ -75,12 +75,14 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
       });
       return;
     }
- //  Login History
-    let ipAddress = req.ip || req.connection.remoteAddress || 'Unknown';
+//  //  Login History
+//     let ipAddress = req.ip || req.connection.remoteAddress || 'Unknown';
 
-    if (ipAddress === '::1' || ipAddress === '::ffff:127.0.0.1') {
-      ipAddress = '127.0.0.1';
-}
+//     if (ipAddress === '::1' || ipAddress === '::ffff:127.0.0.1') {
+//       ipAddress = '127.0.0.1';
+// }
+const ipAddress = (req as any).clientIp || 'IP not found';
+
 
 const loginTimeIST = new Date().toLocaleString('en-IN', {
   timeZone: 'Asia/Kolkata',
@@ -88,7 +90,8 @@ const loginTimeIST = new Date().toLocaleString('en-IN', {
     await LoginHistory.query().insert({
       
       user_id: user.id,
-      ip_address: ipAddress,
+      ip_address: (req as any).clientIp, // use the client IP from the request
+      // ip_address: ipAddress,
       login_time: new Date(), // use current timestamp
     });
 
