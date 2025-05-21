@@ -3,7 +3,7 @@ import { singleUpload, multipleUpload } from '../middlewares/upload';
 import { authenticate } from '../middlewares/authMiddleware';
 import * as userController from '../controllers/userController';
 import { getLoginHistory } from '../controllers/loginHistoryController'; // adjust path if needed
-import { checkRoles } from '../middlewares/checkRoles';
+import { checkPermission } from '../middlewares/checkRoles';
 
 const router = express.Router();
 
@@ -82,7 +82,7 @@ router.get('/login-history',authenticate,getLoginHistory);
  *         description: Unauthorized
  */
 
-router.get('/', authenticate,checkRoles('Admin','SuperAdmin','Manager'), userController.getAllUsers);
+router.get('/', authenticate,checkPermission(), userController.getAllUsers);
 /**
  * @swagger
  * /users/{id}:
