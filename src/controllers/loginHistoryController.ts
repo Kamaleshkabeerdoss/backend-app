@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import LoginHistory from '../models/LoginHistory';
-import requestIp from 'request-ip';
+
 export const getLoginHistory = async (req: Request, res: Response) => {
   try {
     // Get page number from query string, default to 1
@@ -18,26 +18,10 @@ export const getLoginHistory = async (req: Request, res: Response) => {
       const loginTimeIST = new Date(record.login_time).toLocaleString('en-IN', {
         timeZone: 'Asia/Kolkata',
       });
-
-let ipAddress =
-  req.headers['cf-connecting-ip']?.toString() ||
-  req.headers['x-real-ip']?.toString() ||
-  req.headers['x-forwarded-for']?.toString().split(',')[0].trim() ||
-  req.socket.remoteAddress ||
-  'IP not found';
-
-// Normalize IPv6-mapped IPv4
-if (ipAddress === '::1' || ipAddress === '::ffff:127.0.0.1') {
-  ipAddress = '127.0.0.1';
-} else if (ipAddress.startsWith('::ffff:')) {
-  ipAddress = ipAddress.replace('::ffff:', '');
-}
-
-
       return {
         id : record.id,
         user_id: record.user_id,
-        ip_address: ipAddress,
+        ip_address: record.ip_address,
         login_time: loginTimeIST,
       };
     });
