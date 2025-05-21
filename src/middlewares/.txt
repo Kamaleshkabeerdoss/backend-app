@@ -1,0 +1,53 @@
+// import { Request, Response, NextFunction } from 'express';
+
+// export const validateUser = (req: Request, res: Response, next: NextFunction): void => {
+//   const { name, age, email, mobileNumber, address, gender, dateOfBirth } = req.body;
+
+//   // Name: letters only, max 30 characters
+//   if (!name || typeof name !== 'string' || !/^[A-Za-z\s]+$/.test(name) || name.length > 30) {
+//     res.status(400).json({ message: 'Name must contain only letters and be up to 30 characters' });
+//     return;
+//   }
+
+//   // Age: number and at least 18
+//   if (typeof age !== 'number' || age < 18) {
+//     res.status(400).json({ message: 'Age must be a number and at least 18' });
+//     return;
+//   }
+
+//   // Email: simple regex check
+//   if (!email || typeof email !== 'string' || !/^\S+@\S+\.\S+$/.test(email)) {
+//     res.status(400).json({ message: 'Invalid email format' });
+//     return;
+//   }
+
+//   // Address: must be string and max 200 characters
+//   if (!address || typeof address !== 'string' || address.length > 200) {
+//     res.status(400).json({ message: 'Address must be a string with a max length of 200 characters' });
+//     return;
+//   }
+
+//   // Mobile Number: must be exactly 10 digits
+//   if (!mobileNumber || !/^\d{10}$/.test(mobileNumber)) {
+//     res.status(400).json({ message: 'Mobile number must be exactly 10 digits' });
+//     return;
+//   }
+
+//   // Gender: must be "male" or "female"
+//   if (!['male', 'female'].includes(gender?.toLowerCase())) {
+//     res.status(400).json({ message: 'Gender must be either "male" or "female"' });
+//     return;
+//   }
+
+//   // Date of Birth: validate DD/MM/YYYY format
+//   if (!/^\d{2}\/\d{2}\/\d{4}$/.test(dateOfBirth)) {
+//     res.status(400).json({ message: 'Date of Birth must be in DD/MM/YYYY format' });
+//     return;
+//   }
+
+//   // Convert dateOfBirth to YYYY-MM-DD for SQL
+//   // const [day, month, year] = dateOfBirth.split('/');
+//   // req.body.dateOfBirth = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+
+//   next();
+// };
