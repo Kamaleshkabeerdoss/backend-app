@@ -19,7 +19,7 @@ export const registerValidationSchema = yup.object().shape({
     .string()
     .matches(/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/, 'Invalid date of birth')
     .required('DOB is required'),
-  role: yup.string().oneOf(['Admin','User','SuperAdmin','Manager'],'Role must be either Admin or User').required('Role is required'),
+  role: yup.string().required('Role is required'),
 });
 
 export const loginValidationSchema = yup.object().shape({

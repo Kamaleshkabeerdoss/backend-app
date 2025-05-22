@@ -82,7 +82,7 @@ router.get('/login-history',authenticate,getLoginHistory);
  *         description: Unauthorized
  */
 
-router.get('/', authenticate,checkPermission(), userController.getAllUsers);
+router.get('/', authenticate,checkPermission('getAllUsers'), userController.getAllUsers);
 /**
  * @swagger
  * /users/{id}:
@@ -294,7 +294,7 @@ router.get('/profile', authenticate, userController.getUserProfile);
  *         description: Unauthorized
  */
 
-router.post('/upload-single', authenticate, singleUpload, userController.uploadFile);
+router.post('/upload-single', authenticate,checkPermission('upload-single') ,singleUpload, userController.uploadFile);
 /**
  * @swagger
  * /users/upload-multiple:
